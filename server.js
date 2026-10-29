@@ -14,6 +14,11 @@ app.get('/', (req, res) => {
     res.send('สวัสดีร้านส้มตำ');
 });
 
+// route ให้ Render เช็กว่าเซิร์ฟเวอร์ยังมีชีวิต (ต้องอยู่ก่อนตัวจัดการ 404)
+app.get('/api/health', (req, res) => {
+    res.json({ ok: true });
+});
+
 function validateUser(body) {
     if (typeof body !== 'object' || body === null) {
         return [{ field: 'body', message: 'ต้องส่งข้อมูลเป็น JSON object' }];
@@ -333,9 +338,4 @@ app.use((err, req, res, next) => {
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-});
-
-// server.js: route ให้ Render เช็กว่าเซิร์ฟเวอร์ยังมีชีวิต
-app.get('/api/health', (req, res) => {
-    res.json({ ok: true });
 });
